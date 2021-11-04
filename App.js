@@ -5,20 +5,20 @@ import axios from 'axios'
 
 export default function App() {
 
-  //Fetching users from online database
-  async function fetchUsers() {
+  //Fetching Pokemon from online database
+  async function fetchPokemon() {
     try {
       const { data } = await axios.get('https://pokeapi.co/')
-      setUsers(data.results)
+      setPokemon(data.results)
     } catch (error) {
       console.log(error)
-      Alert.alert('Error getting users', '', [{ text: 'Retry', onPress: () => fetchUsers() }])
+      Alert.alert('Error getting Pokemon', '', [{ text: 'Retry', onPress: () => fetchPokemon() }])
     }
   }
 
-  //Hook to fetch users
+  //Hook to fetch Pokemon
   useEffect(() => {
-    fetchUsers()
+    fetchPokemon()
   }, [])
 
   return (
