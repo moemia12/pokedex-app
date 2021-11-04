@@ -5,8 +5,21 @@ import axios from 'axios'
 
 export default function App() {
 
+  //Fetching users from online database
+  async function fetchUsers() {
+    try {
+      const { data } = await axios.get('https://pokeapi.co/')
+      setUsers(data.results)
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Error getting users', '', [{ text: 'Retry', onPress: () => fetchUsers() }])
+    }
+  }
 
-
+  //Hook to fetch users
+  useEffect(() => {
+    fetchUsers()
+  }, [])
 
   return (
     <View style={styles.container}>
