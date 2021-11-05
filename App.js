@@ -1,14 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect  } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import axios from 'axios'
 
 export default function App() {
 
+  const [pokemon, setPokemon] = useState([])
+
   //Fetching Pokemon from online database
   async function fetchPokemon() {
     try {
-      const { data } = await axios.get('https://pokeapi.co/')
+      const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100&offset=200')
       setPokemon(data.results)
     } catch (error) {
       console.log(error)
@@ -16,7 +18,7 @@ export default function App() {
     }
   }
 
-  //Hook to fetch Pokemon
+  //Hook to fetch Pokemon upon component mount
   useEffect(() => {
     fetchPokemon()
   }, [])
