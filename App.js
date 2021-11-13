@@ -26,7 +26,7 @@ const images = {
   19: require('././assets/pokemon-sprites/20.png'),
   20: require('././assets/pokemon-sprites/21.png'),
   21: require('././assets/pokemon-sprites/22.png'),
-  22: require('././assets/pokemon-sprites/23.png'),
+  22: require('././assets/pokemon-sprites/23.png'), 
   23: require('././assets/pokemon-sprites/24.png'),
   24: require('././assets/pokemon-sprites/25.png'),
   25: require('././assets/pokemon-sprites/25.png'),
