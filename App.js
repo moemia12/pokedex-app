@@ -24,11 +24,14 @@ export default function App() {
     fetchPokemon()
   }, [])
 
-  const renderPokemon = ({ item, index }) => {
+
+  const renderPokemon = ({ item }) => {
     let url = item.url
+    console.log(url)
     const idPokemon = url.split('https://pokeapi.co/api/v2/pokemon/')
     const link = urlImage + idPokemon[1].substring(0, idPokemon[1].length-1) + ".png"
-    console.log('link', link)
+    
+
     return (
       <View style={styles.pokemons}>
         <Image 
@@ -42,20 +45,15 @@ export default function App() {
   }
 
   return (
-
-
-
-    <View style={styles.topBar}>
-      <TopBar style={styles.container}/>
+    <View style={styles.container}>
+      <TopBar/>
       <FlatList
         numColumns={2}
         data={pokemons}
         renderItem={renderPokemon}
-        keyExtractor={item => `key-${item.name}`}
+        keyExtractor={pokemon => `key-${pokemon.name}`}
         style={styles.container}
       >
-
-
       </FlatList>
     </View>
   );
@@ -66,11 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#101010'
   },
-  topBar: {
-  flex: 1,
-  height: 10
-  
-  },
+
   pokemons: {
     flex: 1,
     justifyContent: 'center',
@@ -78,7 +72,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#181818',
     marginTop: 10,
     marginHorizontal: 5,
-    padding: 2
+    padding: 2,
+    borderRadius: 20
   },
   text: {
     color: 'white'
