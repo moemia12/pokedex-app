@@ -3,7 +3,7 @@ import { View, StyleSheet, Image } from 'react-native'
 
 export default function TopBar() {
     return (
-        <View style={styles.container}>
+        <View>
             <Image style={styles.logo} source={require('../assets/pokemonlogo-new.png')}/>
         </View>
     )
@@ -11,11 +11,10 @@ export default function TopBar() {
 
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
     logo: {
         resizeMode: 'center',
-        bottom: 30
+        right: 85,
+        height: 110,
+        backgroundColor: '#101010',
     },
   })
