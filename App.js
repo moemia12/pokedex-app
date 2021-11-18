@@ -24,16 +24,15 @@ export default function App() {
     fetchPokemon()
   }, [])
 
-
+  //Function for FlatList - To render Pokemon images
   const renderPokemon = ({ item }) => {
     let url = item.url
-    console.log(url)
     const idPokemon = url.split('https://pokeapi.co/api/v2/pokemon/')
     const link = urlImage + idPokemon[1].substring(0, idPokemon[1].length-1) + ".png"
     
-
     return (
-      <View style={styles.pokemons}>
+      //Individual images
+      <View style={styles.pokemons}> 
         <Image 
         style={styles.image} 
         resizeMode='contain' 
@@ -45,8 +44,10 @@ export default function App() {
   }
 
   return (
+    //App container
     <View style={styles.container}>
       <TopBar/>
+      {/**Pokemon image grid display*/}
       <FlatList
         numColumns={2}
         data={pokemons}
