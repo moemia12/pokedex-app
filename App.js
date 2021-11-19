@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import TopBar from './components/TopBar';
 import axios from 'axios'
+import { NavigationContainer } from '@react-navigation/native'
 
 const urlImage = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
 
@@ -28,35 +29,38 @@ export default function App() {
   const renderPokemon = ({ item }) => {
     let url = item.url
     const idPokemon = url.split('https://pokeapi.co/api/v2/pokemon/')
-    const link = urlImage + idPokemon[1].substring(0, idPokemon[1].length-1) + ".png"
-    
+    const link = urlImage + idPokemon[1].substring(0, idPokemon[1].length - 1) + ".png"
+
     return (
       //Individual images
-      <View style={styles.pokemons}> 
-        <Image 
-        style={styles.image} 
-        resizeMode='contain' 
-        source={{uri:link}}
+      <TouchableOpacity onPress={() => alert('clicked ' + item.name)} style={styles.pokemons}>
+        <Image
+          style={styles.image}
+          resizeMode='contain'
+          source={{ uri: link }}
         />
         <Text style={styles.text}>{item.name}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 
   return (
     //App container
-    <View style={styles.container}>
-      <TopBar/>
-      {/**Pokemon image grid display*/}
-      <FlatList
-        numColumns={2}
-        data={pokemons}
-        renderItem={renderPokemon}
-        keyExtractor={pokemon => `key-${pokemon.name}`}
-        style={styles.container}
-      >
-      </FlatList>
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        <TopBar />
+        {/**Pokemon image grid display*/}
+        <FlatList
+          numColumns={2}
+          data={pokemons}
+          renderItem={renderPokemon}
+          keyExtractor={pokemon => `key-${pokemon.name}`}
+          style={styles.container}
+
+        >
+        </FlatList>
+      </View>
+    </NavigationContainer>
   );
 }
 
