@@ -1,90 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
-import TopBar from './components/TopBar';
-import axios from 'axios'
+import TopBar from './shared/TopBar';
 import { NavigationContainer } from '@react-navigation/native'
+import Navigator from './routes/homeStack'
 
-const urlImage = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
 
 export default function App() {
-
-  const [pokemons, setPokemon] = useState([])
-  //Fetching Pokemon from online database
-  async function fetchPokemon() {
-    try {
-      const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100')
-      setPokemon(data.results)
-    } catch (error) {
-      console.log(error)
-      Alert.alert('Error getting Pokemon', '', [{ text: 'Retry', onPress: () => fetchPokemon() }])
-    }
-  }
-  //Hook to fetch Pokemon upon component mount
-  useEffect(() => {
-    fetchPokemon()
-  }, [])
-
-  //Function for FlatList - To render Pokemon images
-  const renderPokemon = ({ item }) => {
-    let url = item.url
-    const idPokemon = url.split('https://pokeapi.co/api/v2/pokemon/')
-    const link = urlImage + idPokemon[1].substring(0, idPokemon[1].length - 1) + ".png"
-
-    return (
-      //Individual images
-      <TouchableOpacity onPress={() => alert('clicked ' + item.name)} style={styles.pokemons}>
-        <Image
-          style={styles.image}
-          resizeMode='contain'
-          source={{ uri: link }}
-        />
-        <Text style={styles.text}>{item.name}</Text>
-      </TouchableOpacity>
-    )
-  }
-
   return (
     //App container
-    <NavigationContainer>
-      <View style={styles.container}>
-        <TopBar />
-        {/**Pokemon image grid display*/}
-        <FlatList
-          numColumns={2}
-          data={pokemons}
-          renderItem={renderPokemon}
-          keyExtractor={pokemon => `key-${pokemon.name}`}
-          style={styles.container}
-
-        >
-        </FlatList>
-      </View>
-    </NavigationContainer>
+      <Navigator />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#101010'
-  },
 
-  pokemons: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#181818',
-    marginTop: 10,
-    marginHorizontal: 5,
-    padding: 2,
-    borderRadius: 20
-  },
-  text: {
-    color: 'white'
-  },
-  image: {
-    width: 150,
-    height: 150
-  }
-});
