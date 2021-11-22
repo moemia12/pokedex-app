@@ -31,6 +31,7 @@ export default function PokemonList({navigation}) {
 
       const pressHandler = () =>{
             navigation.navigate('Pokemon')
+            console.log(typeof navigation)
       }
   
       return (
