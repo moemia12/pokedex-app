@@ -15,8 +15,7 @@ export default function PokemonList({navigation}) {
         setPokemon(data.results)
       } catch (error) {
         console.log(error)
-        Alert.alert('Error getting Pokemon', '', [{ text: 'Retry', onPress: () => fetchPokemon() }])
-      }
+       }
     }
     //Hook to fetch Pokemon upon component mount
     useEffect(() => {
@@ -30,8 +29,7 @@ export default function PokemonList({navigation}) {
       const link = urlImage + idPokemon[1].substring(0, idPokemon[1].length - 1) + ".png"
 
       const pressHandler = () =>{
-            navigation.navigate('Pokemon')
-            console.log(typeof navigation)
+            navigation.navigate('Pokemon', item)
       }
   
       return (
