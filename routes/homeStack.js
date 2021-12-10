@@ -1,7 +1,7 @@
 import{ createAppContainer } from'react-navigation';
 import { createStackNavigator } from "react-navigation-stack";
-import PokemonList from "../components/PokemonList";
-import Pokemon from '../components/Pokemon'
+import Pokemon from '../components/pokemon'
+import PokemonList from '../components/PokemonList';
 import TopBar from '../shared/TopBar';
 import TopBarBackButton from '../shared/TopBarBackButton';
 import React from 'react';
